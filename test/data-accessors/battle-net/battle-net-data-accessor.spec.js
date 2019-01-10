@@ -20,8 +20,8 @@ describe('Battle Net Data Accessor', () => {
     describe('_getAccessToken()', () => {
         it('should return the token from the post result', () => {
             let expectedToken = 'expected token';
-
-            td.when(mockHttpCommunicator.post(td.matchers.anything(), td.matchers.anything(), td.matchers.anything(), td.matchers.anything())).thenResolve(expectedToken);
+            let postResponse = {'access_token': expectedToken};
+            td.when(mockHttpCommunicator.post(td.matchers.anything(), td.matchers.anything(), td.matchers.anything(), td.matchers.anything())).thenResolve(postResponse);
 
             return battleNetDataAccessor._getAccessToken().then(acutalToken => {
                 expect(acutalToken).to.equal(expectedToken);
