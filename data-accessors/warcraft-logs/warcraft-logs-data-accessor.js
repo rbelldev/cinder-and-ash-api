@@ -6,7 +6,7 @@ let warcraftLogsDataAccessor = {
     getGuildLogs() {
         return new Promise((resolve) => {
             httpCommunicator.get(apiUrl).then((response) => {
-                resolve(response.data);
+                resolve(response);
             })
         });
     }
