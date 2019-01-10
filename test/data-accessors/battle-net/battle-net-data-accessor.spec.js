@@ -17,6 +17,48 @@ describe('Battle Net Data Accessor', () => {
         process.env.BATTLE_NET_API_CLIENT_SECRET = undefined;
     });
 
+    describe('getGuildMembers()', () => {
+
+        beforeEach(() => {
+            battleNetDataAccessor._getAccessToken = td.function();
+            td.when(battleNetDataAccessor._getAccessToken()).thenResolve('');
+        });
+
+        it('should return the result from the get request', () => {
+            let expectedResult = {'key': 'data'};
+            td.when(mockHttpCommunicator.get(td.matchers.anything(), td.matchers.anything())).thenResolve(expectedResult);
+
+            return battleNetDataAccessor.getGuildMembers().then(result => {
+                expect(result).to.equal(expectedResult);
+            });
+        });
+
+        it('should use the correct url', () => {
+            let expectedUrl = `https://us.api.blizzard.com/wow/guild/malganis/cinder%20and%20ash?fields=members`;
+            let urlCaptor = td.matchers.captor();
+
+            td.when(mockHttpCommunicator.get(urlCaptor.capture(), td.matchers.anything())).thenResolve({});
+
+            return battleNetDataAccessor.getGuildMembers().then(() => {
+                expect(urlCaptor.value).to.equal(expectedUrl);
+            });
+        });
+
+        it('should pass the correct headers', () => {
+            let expectedAccessToken = 'my access token';
+            td.when(battleNetDataAccessor._getAccessToken()).thenResolve(expectedAccessToken);
+
+            let expectedHeaders = {'Authorization': `Bearer ${expectedAccessToken}`};
+            let headersCaptor = td.matchers.captor();
+
+            td.when(mockHttpCommunicator.get(td.matchers.anything(), headersCaptor.capture())).thenResolve({});
+
+            return battleNetDataAccessor.getGuildMembers().then(() => {
+                expect(headersCaptor.value).to.deep.equal(expectedHeaders);
+            });
+        });
+    });
+
     describe('_getAccessToken()', () => {
         it('should return the token from the post result', () => {
             let expectedToken = 'expected token';
