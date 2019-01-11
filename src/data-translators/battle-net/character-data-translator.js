@@ -12,6 +12,7 @@ class CharacterDataTranslator {
             class: classMap[characterJson['class']],
             spec: spec,
             role: role,
+            level: characterJson['level']
         };
     }
 }

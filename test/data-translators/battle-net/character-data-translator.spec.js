@@ -57,6 +57,14 @@ describe('Character Data Translator', () => {
             let character = characterDataTranslator.translate(characterJson, {});
             expect(character.spec).to.equal('unknown');
             expect(character.role).to.equal('unknown');
+        });
+
+        it('should map level', () => {
+            let expectedLevel = 110;
+            characterJson.level = expectedLevel;
+
+            let character = characterDataTranslator.translate(characterJson, {});
+            expect(character.level).to.equal(expectedLevel);
         })
     })
 });
