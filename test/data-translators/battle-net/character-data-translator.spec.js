@@ -1,14 +1,15 @@
 const expect = require('chai').expect;
 
 describe('Character Data Translator', () => {
-    let characterJson = {
-        name: undefined,
-        class: undefined,
-        spec: {}
-    };
+    let characterJson;
     let characterDataTranslator;
 
     beforeEach(() => {
+        characterJson = {
+            name: undefined,
+            class: undefined,
+        };
+
         characterDataTranslator = require('../../../src/data-translators/battle-net/character-data-translator');
     });
 
@@ -51,5 +52,11 @@ describe('Character Data Translator', () => {
             let character = characterDataTranslator.translate(characterJson, {});
             expect(character.role).to.equal(expectedRole);
         });
+
+        it(`should return 'unknown' for spec and role if no spec present`, () => {
+            let character = characterDataTranslator.translate(characterJson, {});
+            expect(character.spec).to.equal('unknown');
+            expect(character.role).to.equal('unknown');
+        })
     })
 });
