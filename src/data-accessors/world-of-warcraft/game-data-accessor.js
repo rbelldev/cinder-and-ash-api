@@ -8,18 +8,17 @@ class GameDataAccessor {
 
 module.exports = new GameDataAccessor();
 
-
 let classMap = {
-    1: {name: "Warrior"},
-    2: {name: "Paladin"},
-    3: {name: "Hunter"},
-    4: {name: "Rouge"},
-    5: {name: "Priest"},
-    6: {name: "Death Knight"},
-    7: {name: "Shaman"},
-    8: {name: "Mage"},
-    9: {name: "Warlock"},
-    10: {name: "Monk"},
-    11: {name: "Druid"},
-    12: {name: "Demon Hunter"},
+    1: "Warrior",
+    2: "Paladin",
+    3: "Hunter",
+    4: "Rouge",
+    5: "Priest",
+    6: "Death Knight",
+    7: "Shaman",
+    8: "Mage",
+    9: "Warlock",
+    10: "Monk",
+    11: "Druid",
+    12: "Demon Hunter",
 };
