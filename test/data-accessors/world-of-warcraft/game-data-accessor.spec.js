@@ -4,7 +4,7 @@ describe('Game Data Accessor', () => {
     let gameDataAccessor;
 
     beforeEach(() => {
-        gameDataAccessor = require('../../../data-accessors/world-of-warcraft/game-data-accessor');
+        gameDataAccessor = require('../../../src/data-accessors/world-of-warcraft/game-data-accessor');
     });
 
     describe('getClassMap()', () => {

@@ -1,10 +1,10 @@
 const express = require('express');
 const logger = require('morgan');
 
-const corsSettings = require('./configuration/cors');
+const corsSettings = require('./src/configuration/cors');
 
-const warcraftLogsRouter = require('./routes/warcraft-logs');
-const indexRouter = require('./routes/index');
+const warcraftLogsRouter = require('./src/routes/warcraft-logs');
+const indexRouter = require('./src/routes/index');
 
 const app = express();
 

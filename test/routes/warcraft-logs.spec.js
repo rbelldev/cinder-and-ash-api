@@ -5,8 +5,8 @@ describe('GET /warcraft-logs', () => {
     let mockWarcraftLogsDataAccessor;
 
     beforeEach(() => {
-        mockWarcraftLogsDataAccessor = td.replace('../../data-accessors/warcraft-logs/warcraft-logs-data-accessor');
-        warcraftLogsRoutes = require('../../routes/warcraft-logs');
+        mockWarcraftLogsDataAccessor = td.replace('../../src/data-accessors/warcraft-logs/warcraft-logs-data-accessor');
+        warcraftLogsRoutes = require('../../src/routes/warcraft-logs');
     });
 
     it('should respond the value from the warcraft log data accessor', async () => {

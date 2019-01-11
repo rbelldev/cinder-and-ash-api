@@ -9,7 +9,7 @@ describe('Character Data Translator', () => {
     let characterDataTranslator;
 
     beforeEach(() => {
-        characterDataTranslator = require('../../../data-translators/battle-net/character-data-translator');
+        characterDataTranslator = require('../../../src/data-translators/battle-net/character-data-translator');
     });
 
     describe('translate', () => {

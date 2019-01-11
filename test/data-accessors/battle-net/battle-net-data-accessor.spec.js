@@ -8,8 +8,8 @@ describe('Battle Net Data Accessor', () => {
     beforeEach(() => {
         process.env.BATTLE_NET_API_CLIENT_ID = 'expectedApiClientId';
         process.env.BATTLE_NET_API_CLIENT_SECRET = 'expectedApiClientSecret';
-        mockHttpCommunicator = td.replace('../../../communicators/http/http-communicator');
-        battleNetDataAccessor = require('../../../data-accessors/battle-net/battle-net-data-accessor');
+        mockHttpCommunicator = td.replace('../../../src/communicators/http/http-communicator');
+        battleNetDataAccessor = require('../../../src/data-accessors/battle-net/battle-net-data-accessor');
     });
 
     afterEach(() => {

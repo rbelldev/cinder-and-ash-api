@@ -7,9 +7,9 @@ describe('Guild Data Translator', () => {
     let guildDataTranslator;
 
     beforeEach(() => {
-        mockCharacterDataTranslator = td.replace('../../../data-translators/battle-net/character-data-translator');
-        mockGameDataAccessor = td.replace('../../../data-accessors/world-of-warcraft/game-data-accessor');
-        guildDataTranslator = require('../../../data-translators/battle-net/guild-data-translator');
+        mockCharacterDataTranslator = td.replace('../../../src/data-translators/battle-net/character-data-translator');
+        mockGameDataAccessor = td.replace('../../../src/data-accessors/world-of-warcraft/game-data-accessor');
+        guildDataTranslator = require('../../../src/data-translators/battle-net/guild-data-translator');
     });
 
     describe('translate(:guildJson)', () => {

@@ -7,8 +7,8 @@ describe('Warcraft Logs Data Accessor', () => {
 
     beforeEach(() => {
         process.env.WARCRAFT_LOGS_API_KEY = 'expectedApiKey';
-        mockHttpCommunicator = td.replace('../../../communicators/http/http-communicator');
-        warcraftLogsDataAccessor = require('../../../data-accessors/warcraft-logs/warcraft-logs-data-accessor');
+        mockHttpCommunicator = td.replace('../../../src/communicators/http/http-communicator');
+        warcraftLogsDataAccessor = require('../../../src/data-accessors/warcraft-logs/warcraft-logs-data-accessor');
     });
 
     afterEach(() => {

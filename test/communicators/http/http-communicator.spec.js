@@ -9,7 +9,7 @@ describe('HTTP Communicator', () => {
     beforeEach(() => {
         mockAxios = td.replace('axios');
         mockQueryString = td.replace('querystring');
-        httpCommunicator = require('../../../communicators/http/http-communicator');
+        httpCommunicator = require('../../../src/communicators/http/http-communicator');
     });
 
     describe("get(:url, :headers)", () => {
