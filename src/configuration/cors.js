@@ -1,12 +1,11 @@
-let corsSettings = function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+let corsSettings = function (request, response, next) {
+    response.header('Access-Control-Allow-Origin', '*');
+    response.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
+    response.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
 
-    if ('OPTIONS' === req.method) {
-        res.send(200);
-    }
-    else {
+    if ('OPTIONS' === request.method) {
+        response.sendStatus(200);
+    } else {
         next();
     }
 };
