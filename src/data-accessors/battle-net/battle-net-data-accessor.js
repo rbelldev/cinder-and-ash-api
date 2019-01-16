@@ -2,12 +2,22 @@ const httpCommunicator = require('../../communicators/http/http-communicator');
 
 class BattleNetDataAccessor {
     async getGuildMembers() {
-        let accessToken = await this._getAccessToken();
         let url = `https://us.api.blizzard.com/wow/guild/malganis/cinder%20and%20ash?fields=members`;
-        let headers = {'Authorization': `Bearer ${accessToken}`};
+        let headers = await this._buildHeaders();
 
         return await httpCommunicator.get(url, headers);
     };
+
+    async getCharacter(realm, characterName) {
+        let url = `https://us.api.blizzard.com/wow/character/${realm}/${characterName}`;
+        let headers = await this._buildHeaders();
+        return await httpCommunicator.get(url, headers);
+    }
+
+    async _buildHeaders() {
+        let accessToken = await this._getAccessToken();
+        return {'Authorization': `Bearer ${accessToken}`};
+    }
 
     async _getAccessToken() {
         let response = await httpCommunicator.post(
