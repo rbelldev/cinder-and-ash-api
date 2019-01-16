@@ -13,7 +13,7 @@ describe('Guild Data Translator', () => {
     });
 
     describe('translate(:guildJson)', () => {
-        it('should map each character', () => {
+        it('should map each character', async () => {
             let expectedClassMap = {'the': 'class map'};
             td.when(mockGameDataAccessor.getClassMap()).thenResolve(expectedClassMap);
 
@@ -32,11 +32,11 @@ describe('Guild Data Translator', () => {
             td.when(mockCharacterDataTranslator.translate(character1, expectedClassMap)).thenReturn(expectedCharacter1);
             td.when(mockCharacterDataTranslator.translate(character2, expectedClassMap)).thenReturn(expectedCharacter2);
 
-            return guildDataTranslator.translate(guildJson).then(guildInfo => {
-                expect(guildInfo.members.length).to.equal(2);
-                expect(guildInfo.members).to.include(expectedCharacter1);
-                expect(guildInfo.members).to.include(expectedCharacter2);
-            });
+            let guildInfo = await guildDataTranslator.translate(guildJson);
+
+            expect(guildInfo.members.length).to.equal(2);
+            expect(guildInfo.members).to.include(expectedCharacter1);
+            expect(guildInfo.members).to.include(expectedCharacter2);
 
         })
     })

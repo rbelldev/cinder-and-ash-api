@@ -8,7 +8,7 @@ describe('Game Data Accessor', () => {
     });
 
     describe('getClassMap()', () => {
-        it('should return the correct class map', () => {
+        it('should return the correct class map', async () => {
             let expectedClassMap = {
                 1: "Warrior",
                 2: "Paladin",
@@ -24,9 +24,9 @@ describe('Game Data Accessor', () => {
                 12: "Demon Hunter",
             };
 
-            return gameDataAccessor.getClassMap().then(classMap => {
-                expect(classMap).to.deep.equal(expectedClassMap);
-            });
+            let classMap = await gameDataAccessor.getClassMap();
+
+            expect(classMap).to.deep.equal(expectedClassMap);
         })
     });
 });

@@ -16,15 +16,15 @@ describe('Warcraft Logs Data Accessor', () => {
     });
 
     describe('getGuildLogs()', () => {
-        it('should return the result from the HttpCommunicator', () => {
+        it('should return the result from the HttpCommunicator', async () => {
             let expectedUrl = `${'https://www.warcraftlogs.com:443/v1/reports/guild'}/${'cinder%20and%20ash'}/${`malganis`}/${'us'}?api_key=${process.env.WARCRAFT_LOGS_API_KEY}`;
             let expectedResponse = 'expected response';
 
             td.when(mockHttpCommunicator.get(expectedUrl)).thenResolve(expectedResponse);
 
-            return warcraftLogsDataAccessor.getGuildLogs().then(actualResponse => {
-                expect(actualResponse).to.equal(expectedResponse);
-            });
+            let response = await warcraftLogsDataAccessor.getGuildLogs();
+
+            expect(response).to.equal(expectedResponse);
         })
     });
 });

@@ -24,27 +24,27 @@ describe('Battle Net Data Accessor', () => {
             td.when(battleNetDataAccessor._getAccessToken()).thenResolve('');
         });
 
-        it('should return the result from the get request', () => {
+        it('should return the result from the get request', async () => {
             let expectedResult = {'key': 'data'};
             td.when(mockHttpCommunicator.get(td.matchers.anything(), td.matchers.anything())).thenResolve(expectedResult);
 
-            return battleNetDataAccessor.getGuildMembers().then(result => {
-                expect(result).to.equal(expectedResult);
-            });
+            let result = await battleNetDataAccessor.getGuildMembers();
+
+            expect(result).to.equal(expectedResult);
         });
 
-        it('should use the correct url', () => {
+        it('should use the correct url', async () => {
             let expectedUrl = `https://us.api.blizzard.com/wow/guild/malganis/cinder%20and%20ash?fields=members`;
             let urlCaptor = td.matchers.captor();
 
             td.when(mockHttpCommunicator.get(urlCaptor.capture(), td.matchers.anything())).thenResolve({});
 
-            return battleNetDataAccessor.getGuildMembers().then(() => {
-                expect(urlCaptor.value).to.equal(expectedUrl);
-            });
+            await battleNetDataAccessor.getGuildMembers();
+
+            expect(urlCaptor.value).to.equal(expectedUrl);
         });
 
-        it('should pass the correct headers', () => {
+        it('should pass the correct headers', async () => {
             let expectedAccessToken = 'my access token';
             td.when(battleNetDataAccessor._getAccessToken()).thenResolve(expectedAccessToken);
 
@@ -53,57 +53,57 @@ describe('Battle Net Data Accessor', () => {
 
             td.when(mockHttpCommunicator.get(td.matchers.anything(), headersCaptor.capture())).thenResolve({});
 
-            return battleNetDataAccessor.getGuildMembers().then(() => {
-                expect(headersCaptor.value).to.deep.equal(expectedHeaders);
-            });
+            await battleNetDataAccessor.getGuildMembers();
+
+            expect(headersCaptor.value).to.deep.equal(expectedHeaders);
         });
     });
 
     describe('_getAccessToken()', () => {
-        it('should return the token from the post result', () => {
+        it('should return the token from the post result', async () => {
             let expectedToken = 'expected token';
             let postResponse = {'access_token': expectedToken};
             td.when(mockHttpCommunicator.post(td.matchers.anything(), td.matchers.anything(), td.matchers.anything(), td.matchers.anything())).thenResolve(postResponse);
 
-            return battleNetDataAccessor._getAccessToken().then(acutalToken => {
-                expect(acutalToken).to.equal(expectedToken);
-            });
+            let actualToken = await battleNetDataAccessor._getAccessToken();
+
+            expect(actualToken).to.equal(expectedToken);
         });
 
-        it('should use the correct url', () => {
+        it('should use the correct url', async () => {
             let expectedUrl = `https://us.battle.net/oauth/token`;
             let urlCaptor = td.matchers.captor();
 
             td.when(mockHttpCommunicator.post(urlCaptor.capture(), td.matchers.anything(), td.matchers.anything(), td.matchers.anything())).thenResolve({});
 
-            return battleNetDataAccessor._getAccessToken().then(() => {
-                expect(urlCaptor.value).to.equal(expectedUrl);
-            });
+            await battleNetDataAccessor._getAccessToken();
+
+            expect(urlCaptor.value).to.equal(expectedUrl);
         });
 
-        it('should pass the correct data object', () => {
+        it('should pass the correct data object', async () => {
             let expectedData = {'grant_type': 'client_credentials'};
             let dataCaptor = td.matchers.captor();
 
             td.when(mockHttpCommunicator.post(td.matchers.anything(), dataCaptor.capture(), td.matchers.anything(), td.matchers.anything())).thenResolve({});
 
-            return battleNetDataAccessor._getAccessToken().then(() => {
-                expect(dataCaptor.value).to.deep.equal(expectedData);
-            });
+            await battleNetDataAccessor._getAccessToken();
+
+            expect(dataCaptor.value).to.deep.equal(expectedData);
         });
 
-        it('should pass the correct headers', () => {
+        it('should pass the correct headers', async () => {
             let expectedHeaders = null;
             let headerCaptor = td.matchers.captor();
 
             td.when(mockHttpCommunicator.post(td.matchers.anything(), td.matchers.anything(), headerCaptor.capture(), td.matchers.anything())).thenResolve({});
 
-            return battleNetDataAccessor._getAccessToken().then(() => {
-                expect(headerCaptor.value).to.deep.equal(expectedHeaders);
-            });
+            await battleNetDataAccessor._getAccessToken();
+
+            expect(headerCaptor.value).to.deep.equal(expectedHeaders);
         });
 
-        it('should pass the correct auth object', () => {
+        it('should pass the correct auth object', async () => {
             let expectedAuth = {
                 username: process.env.BATTLE_NET_API_CLIENT_ID,
                 password: process.env.BATTLE_NET_API_CLIENT_SECRET
@@ -112,9 +112,9 @@ describe('Battle Net Data Accessor', () => {
 
             td.when(mockHttpCommunicator.post(td.matchers.anything(), td.matchers.anything(), td.matchers.anything(), authCaptor.capture())).thenResolve({});
 
-            return battleNetDataAccessor._getAccessToken().then(() => {
-                expect(authCaptor.value).to.deep.equal(expectedAuth);
-            });
+            await battleNetDataAccessor._getAccessToken();
+
+            expect(authCaptor.value).to.deep.equal(expectedAuth);
         });
     });
 });

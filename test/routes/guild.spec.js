@@ -11,7 +11,7 @@ describe('GET /guild/members', () => {
         guildRoutes = require('../../src/routes/guild');
     });
 
-    it('should return the translated guild member list', (done) => {
+    it('should return the translated guild member list', async () => {
         let expectedRawGuildJson = JSON.stringify({'some': 'json'});
         td.when(mockBattleNetDataAccessor.getGuildMembers()).thenResolve(expectedRawGuildJson);
 
@@ -19,11 +19,9 @@ describe('GET /guild/members', () => {
         td.when(mockGuildDataTranslator.translate(expectedRawGuildJson)).thenResolve(expectedTranslatedMemberList);
 
         let mockResponse = td.object({send: td.function()});
-        guildRoutes.getMembers(null, mockResponse);
 
-        setTimeout(() => {
-            td.verify(mockResponse.send(expectedTranslatedMemberList));
-            done();
-        }, 100);
+        await guildRoutes.getMembers(null, mockResponse);
+
+        td.verify(mockResponse.send(expectedTranslatedMemberList));
     })
 });

@@ -1,8 +1,6 @@
 class GameDataAccessor {
-    getClassMap() {
-        return new Promise(resolve => {
-            resolve(classMap);
-        });
+    async getClassMap() {
+        return classMap;
     }
 }
 

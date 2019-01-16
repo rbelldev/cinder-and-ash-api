@@ -2,30 +2,19 @@ const axios = require('axios');
 const querystring = require('querystring');
 
 class HttpCommunicator {
-    static get(url, headers) {
-        return new Promise(((resolve, reject) => {
-            axios.get(url, {headers: headers}).then(response => {
-                resolve(response.data);
-            }).catch(() => {
-                reject();
-            })
-        }));
+    static async get(url, headers) {
+        let response = await axios.get(url, {headers: headers});
+        return response.data;
     }
 
-    static post(url, data, headers, auth) {
-        return new Promise(((resolve, reject) => {
-            let config = {
-                headers: headers,
-                auth: auth
-            };
+    static async post(url, data, headers, auth) {
+        let config = {
+            headers: headers,
+            auth: auth
+        };
 
-            axios.post(url, querystring.stringify(data), config).then(response => {
-                resolve(response.data);
-            }).catch((error) => {
-                console.log(error);
-                reject();
-            })
-        }));
+        let response = await axios.post(url, querystring.stringify(data), config);
+        return response.data;
     }
 }
 
