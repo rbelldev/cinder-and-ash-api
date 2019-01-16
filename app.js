@@ -5,6 +5,7 @@ const corsSettings = require('./src/configuration/cors');
 
 const warcraftLogsRouter = require('./src/routes/warcraft-logs');
 const guildRouter = require('./src/routes/guild');
+const raiderApplicationRouter = require('./src/routes/raider-applications');
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(corsSettings);
 
 app.use('/warcraft-logs', warcraftLogsRouter.get);
 app.use('/guild/members', guildRouter.getMembers);
+app.post('/raider-applications', raiderApplicationRouter.post);
 
 app.listen(process.env.PORT);
 
