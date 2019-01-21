@@ -9,7 +9,7 @@ class BattleNetDataAccessor {
     };
 
     async getCharacter(realm, characterName) {
-        let url = `https://us.api.blizzard.com/wow/character/${realm}/${characterName}`;
+        let url = `https://us.api.blizzard.com/wow/character/${realm}/${characterName}?fields=talents`;
         let headers = await this._buildHeaders();
         return await httpCommunicator.get(url, headers);
     }

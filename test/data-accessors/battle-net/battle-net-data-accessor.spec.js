@@ -78,7 +78,7 @@ describe('Battle Net Data Accessor', () => {
         it('should use the correct url', async () => {
             let expectedRealm = 'malganis';
             let expectedCharacterName = 'Knute';
-            let expectedUrl = `https://us.api.blizzard.com/wow/character/${expectedRealm}/${expectedCharacterName}`;
+            let expectedUrl = `https://us.api.blizzard.com/wow/character/${expectedRealm}/${expectedCharacterName}?fields=talents`;
             let urlCaptor = td.matchers.captor();
 
             td.when(mockHttpCommunicator.get(urlCaptor.capture(), td.matchers.anything())).thenResolve({});

@@ -22,7 +22,7 @@ describe('Character Data Translator', () => {
             expect(character.name).to.equal(expectedName);
         });
 
-        it('should map class', () => {
+        it('should map className', () => {
             characterJson.class = 2;
 
             let expectedClass = {'name': 'Monk'};
@@ -34,10 +34,10 @@ describe('Character Data Translator', () => {
             };
 
             let character = characterDataTranslator.translate(characterJson, classMap);
-            expect(character.class).to.deep.equal(expectedClass);
+            expect(character.className).to.deep.equal(expectedClass);
         });
 
-        it('should map spec', () => {
+        it('should map spec - from spec', () => {
             let expectedSpec = 'Brew Master';
             characterJson.spec = {name: expectedSpec};
 
@@ -45,9 +45,31 @@ describe('Character Data Translator', () => {
             expect(character.spec).to.equal(expectedSpec);
         });
 
-        it('should map role', () => {
+        it('should map spec - from talents', () => {
+            let expectedSpec = 'Brew Master';
+            characterJson.talents = [
+                {spec: {name: 'Wind Walker'}},
+                {selected: true, spec: {name: expectedSpec}}
+            ];
+
+            let character = characterDataTranslator.translate(characterJson, {});
+            expect(character.spec).to.equal(expectedSpec);
+        });
+
+        it('should map role - from spec', () => {
             let expectedRole = 'Tank';
             characterJson.spec = {role: expectedRole};
+
+            let character = characterDataTranslator.translate(characterJson, {});
+            expect(character.role).to.equal(expectedRole);
+        });
+
+        it('should map role - from talents', () => {
+            let expectedRole = 'Tank';
+            characterJson.talents = [
+                {spec: {role: 'DPS'}},
+                {selected: true, spec: {role: expectedRole}}
+            ];
 
             let character = characterDataTranslator.translate(characterJson, {});
             expect(character.role).to.equal(expectedRole);
@@ -65,6 +87,22 @@ describe('Character Data Translator', () => {
 
             let character = characterDataTranslator.translate(characterJson, {});
             expect(character.level).to.equal(expectedLevel);
-        })
+        });
+
+        it('should map realm', () => {
+            let expectedRealm = 'Mal\'Ganis';
+            characterJson.realm = expectedRealm;
+
+            let character = characterDataTranslator.translate(characterJson, {});
+            expect(character.realm).to.equal(expectedRealm);
+        });
+
+        it('should map thumbnail', () => {
+            let expectedThumbnail = 'path to an image';
+            characterJson.thumbnail = expectedThumbnail;
+
+            let character = characterDataTranslator.translate(characterJson, {});
+            expect(character.thumbnail).to.equal(expectedThumbnail);
+        });
     })
 });
