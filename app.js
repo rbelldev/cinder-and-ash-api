@@ -17,7 +17,7 @@ app.use(corsSettings);
 
 app.use('/warcraft-logs', warcraftLogsRouter.get);
 app.use('/guild/members', guildRouter.getMembers);
-app.post('/raider-applications', raiderApplicationRouter.post);
+app.use('/raider-applications', raiderApplicationRouter.post);
 app.use('/battle-net/character/:realm/:characterName', battleNetRouter.character.get);
 
 app.listen(process.env.PORT);
